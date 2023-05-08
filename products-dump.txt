@@ -1,0 +1,15 @@
+("Говядина", 400, "Свежая говядина","https://ketokotleta.ru/wp-content/uploads/7/d/9/7d9421d8fb9ca8b972feea4bdf854eb2.jpeg");
+("Свинина", 300, "Свежая свинина","https://avatars.mds.yandex.net/i?id=c818daf99961d0e8cd97b2e992cd3e57f736def4-9099802-images-thumbs&n=13");
+("Курица", 200, "Свежая курица","https://avatars.mds.yandex.net/i?id=f90c8f58aff5b880ffe2427078ce29eb085a4538-7886515-images-thumbs&n=13");
+("Баранина", 500, "Свежая баранина","https://avatars.mds.yandex.net/i?id=b353bee40a637b974e6cc20267935ab403a63564-8129183-images-thumbs&n=13");
+("Колбаса", 250, "Свежая колбаса","https://avatars.mds.yandex.net/i?id=a29c4a48fc79fe089cb1d61acdeac59f540d7f11-9181443-images-thumbs&n=13");
+("Креветки", 1000, "Свежие креветки","https://avatars.mds.yandex.net/i?id=cb1e8bdf4b327e6d1132051a7c468b0294207887-5487333-images-thumbs&n=13");
+("Морской окунь", 350, "Свежий морской окунь","https://i2.wp.com/tboafricanfoods.co.uk/wp-content/uploads/2020/10/Headless-Red-Beam-Fish-scaled.jpeg");
+("Окорок", 280, "Свежий окорок","https://avatars.mds.yandex.net/i?id=ecd967626701cdc99d91e5df7f27e921a8e5e1e5-7547218-images-thumbs&n=13");
+("Кролик", 450, "Свежий кролик","https://avatars.mds.yandex.net/i?id=0e08fde0a3f3000889908163d89f47058c36b85f-4498485-images-thumbs&n=13");
+("Утка", 380, "Свежая утка","https://www.dartagnan.com/on/demandware.static/-/Sites-dartagnan-live-catalog-en/default/dw4fe3a7f3/images/products/FDUPE002-1.jpg");
+("Фарш говяжий", 180, "Фарш из свежей говядины","https://magnetograph.ru/uploads/items/15562926_1.jpg");
+("Сало", 120, "Свежее сало","https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666792578_36-mykaleidoscope-ru-p-salo-fan-krasivo-40.png");
+("Косточка баранья", 80, "Свежая косточка баранья","https://avatars.mds.yandex.net/i?id=4e89b55818bbd30ae63e421b5960cda3fc6bd09d-6269882-images-thumbs&n=13");
+("Печень куриная", 50, "Свежая куриная печень","https://avatars.mds.yandex.net/i?id=0f6231ca9804ad780888a63ac885e7950872867c-9137656-images-thumbs&n=13");
+("Телятина", 600, "Свежая телятина","https://avatars.mds.yandex.net/i?id=088bd2f4c85c5232c9dafaad5eed2fd1961ca9d6-8497639-images-thumbs&n=13");

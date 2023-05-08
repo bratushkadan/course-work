@@ -1,0 +1,191 @@
+/* Общие стили */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Стили для хедера */
+header {
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+  color: #333333;
+}
+
+/* Стили для секций */
+section {
+  margin: 50px auto;
+  max-width: 1200px;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Стили для списка товаров */
+.products-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  width: 300px;
+  margin: 0 20px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.product-image {
+  max-width: 300px;
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 4px 4px 0 0;
+}
+
+.product-image > img {
+  width: 100%;
+  max-height: 200px;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.product-description {
+  margin-top: 20px;
+}
+
+.add-to-cart {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+}
+
+.add-to-cart:hover {
+  background-color: #222222;
+}
+
+/* Стили для корзины */
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Стили для текста в корзине */
+.cart-item-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.cart-item-title {
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.cart-item-price {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cart-item-quantity {
+  font-size: 16px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.cart-item-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.cart-item-button {
+  padding: 10px;
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.cart-item-button:hover {
+  background-color: #222222;
+}
+
+.cart-total-price {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.checkout-button {
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  padding: 10px 20px;
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkout-button:hover {
+  background-color: #222222;
+}
