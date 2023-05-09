@@ -34,12 +34,13 @@ public class AuthController {
   public Object createAccount(@RequestParam("username") String username, @RequestParam("password") String password) {
     User user = userRepository.findByUsername(username);
     if (user == null) {
+      String hashedPassword = Password.encrypt(password);
       // Создаем пользователя
-      User createdUser = userRepository.save(new User(username, Password.encrypt(password)));
-      
+      User createdUser = userRepository.save(new User(username, hashedPassword));
+
       // Создаем authToken для пользователя
-      // authToken.save()
-      
+      authRepository.save(AuthToken.create(createdUser.getId()));
+
       return createdUser;
     }
 
@@ -47,22 +48,35 @@ public class AuthController {
         .body(new JsonError(String.format("Name '%s' is already taken.", username)));
   }
 
+  @GetMapping("/token")
+  public Object getToken(@RequestParam("username") String username, @RequestParam("password") String password) {
+    User user = userRepository.findByUsername(username);
+
+    if (user != null) {
+      AuthToken token = authRepository.findByUserId(user.getId());
+
+      if (token != null) {
+        // Токен свежий
+        if (!AuthToken.isStale(token)) {
+          return token;
+        }
+        // Необходима перегенерация токена (на случай компрометации)
+        authRepository.delete(token);
+      }
+      return authRepository.save(AuthToken.create(user.getId()));
+    }
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(new JsonError("Invalid credentials."));
+  }
+
   @PostMapping("/check_token_validity")
   public Object checkTokenValidity(@RequestParam("auth_token") String authToken) {
-    HashMap<String, Object> response = new HashMap<String, Object>();
+    AuthToken token = authRepository.findByAuthToken(authToken);
 
-    if (authToken.equals("badanga")) {
-      response.put("ok", false);
-    } else {
-      response.put("ok", true);
-    }
+    HashMap<String, Object> response = new HashMap<>();
+    response.put("ok", token != null && !AuthToken.isStale(token));
 
     return response;
   }
-
-  // @GetMapping("token")
-  // public AuthToken getToken(@RequestParam("username") String username,
-  // @RequestParam("password") String password) {
-  // return
-  // }
 }

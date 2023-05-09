@@ -1,39 +1,54 @@
 package com.example.model;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("carts")
 public class Cart {
+    private class CartItem {
+        private String productId;
+        private int quantity;
+
+        public CartItem(String productId, int quantity) {
+            this.productId = productId;
+            this.quantity = quantity;
+        }
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+    }
+
     private Map<String, Integer> items;
     private String userId;
 
-    public Cart(String userId) {
-        this.items = new HashMap<>();
+    public Cart(Map<String, Integer> items, String userId) {
+        this.items = items;
         this.userId = userId;
     }
 
-    public void addItem(String productId, int quantity) {
+    public Cart addItem(String productId, int quantity) {
         items.put(productId, items.getOrDefault(productId, 0) + quantity);
+        return this;
     }
 
-    public void removeItem(String productId) {
+    public Cart removeItem(String productId) {
         items.remove(productId);
+        return this;
     }
 
-    public Map<String, Integer> getItems() {
-        return items;
-    }
-
-    public void clearCart() {
+    public Cart clearCart() {
         items.clear();
+        return this;
     }
 
-    public void syncCart() {
-        // MongoClient mongoClient = new MongoClient("localhost", 27017);
-        // MongoDatabase database = mongoClient.getDatabase("mydb");
-
+    public ArrayList<CartItem> getItems() {
+        return items;
     }
 }
