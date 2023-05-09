@@ -16,20 +16,30 @@ public class AuthToken {
 
     private String authToken;
     private String userId;
+    private String username;
 
-    public AuthToken(String authToken, String userId, long timestamp) {
+    public AuthToken(String authToken, String username, String userId, long timestamp) {
         super();
         this.authToken = authToken;
+        this.username = username;
         this.userId = userId;
         this.timestamp = timestamp;
     }
 
-    public static AuthToken create(String userId) {
-        return new AuthToken(UUID.randomUUID().toString(), userId, System.currentTimeMillis());
+    public static AuthToken create(String username, String userId) {
+        return new AuthToken(UUID.randomUUID().toString(), username, userId, System.currentTimeMillis());
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getAuthToken() {

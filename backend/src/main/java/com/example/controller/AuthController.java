@@ -21,7 +21,7 @@ import com.example.util.*;
 import java.util.HashMap;
 import java.util.UUID;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -31,15 +31,15 @@ public class AuthController {
   UserRepository userRepository;
 
   @PostMapping("/create_account")
-  public Object createAccount(@RequestParam("username") String username, @RequestParam("password") String password) {
+  public Object createAccount(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("tel") String tel) {
     User user = userRepository.findByUsername(username);
     if (user == null) {
       String hashedPassword = Password.encrypt(password);
       // Создаем пользователя
-      User createdUser = userRepository.save(new User(username, hashedPassword));
+      User createdUser = userRepository.save(new User(username, hashedPassword, tel));
 
       // Создаем authToken для пользователя
-      authRepository.save(AuthToken.create(createdUser.getId()));
+      authRepository.save(AuthToken.create(username, createdUser.getId()));
 
       return createdUser;
     }
@@ -63,7 +63,7 @@ public class AuthController {
         // Необходима перегенерация токена (на случай компрометации)
         authRepository.delete(token);
       }
-      return authRepository.save(AuthToken.create(user.getId()));
+      return authRepository.save(AuthToken.create(user.getUsername(), user.getId()));
     }
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)

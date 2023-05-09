@@ -8,7 +8,7 @@
 <body>
   <header>
     <h1>Мясная лавка</h1>
-    <div class="auth-state">
+    <div id="auth-state">
       
     </div>
   </header>
@@ -24,6 +24,48 @@
       <button class="checkout-button">Оформить заказ</button>
     </section>
   </main>
+<!-- Всплывающее окно -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close-span">&times;</span>
+    <h2>Вход в систему</h2>
+    <form>
+      <label for="login-username">Имя пользователя:</label>
+      <input type="text" id="login-username" name="username" style="display:block;">
+      <label for="login-password">Пароль:</label>
+      <input type="password" id="login-password" name="password" style="display:block;">
+      <button id="login-submit" type="button" style="display:block;">Войти</button>
+    </form>
+  </div>
+</div>
+<!-- Всплывающее окно -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close-span">&times;</span>
+    <h2>Регистрация</h2>
+    <form>
+      <label for="username">Имя пользователя:</label>
+      <input type="text" id="signup-username" name="username" style="display:block;">
+      <label for="password">Пароль:</label>
+      <input type="password" id="signup-password" name="password" style="display:block;">
+      <label for="password-again">Пароль еще раз:</label>
+      <input type="password" id="signup-password-again" name="password-again" style="display:block;">
+      <label for="password">Контактный номер телефона:</label>
+      <input type="tel" id="phone-number" name="tel" style="display:block;">
+      <button id="signup-submit" type="button" style="display:block;">Зарегистрироваться</button>
+    </form>
+  </div>
+</div>
+
+<!-- Всплывающее окно -->
+<div id="order-history-modal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close-span">&times;</span>
+    <h2>История заказов</h2>
+    <div class="order-history-modal-content"></div>
+  </div>
+</div>
+
   <script src="app.js"></script>
 </body>
 </html>

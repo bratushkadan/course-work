@@ -10,14 +10,20 @@ public class User {
 
     private String username;
     private String hashedPassword;
+    private String tel;
 
-    public User(String username, String hashedPassword) {
+    public User(String username, String hashedPassword, String tel) {
         this.username = username;
         this.hashedPassword = hashedPassword;
+        this.tel = tel;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getTel() {
+        return tel;
     }
 
     public String getUsername() {

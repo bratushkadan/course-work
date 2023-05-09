@@ -1,34 +1,21 @@
 package com.example.model;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.*;
 
 @Document("carts")
 public class Cart {
-    private class CartItem {
-        private String productId;
-        private int quantity;
 
-        public CartItem(String productId, int quantity) {
-            this.productId = productId;
-            this.quantity = quantity;
-        }
-
-        public String getProductId() {
-            return productId;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-    }
-
-    private Map<String, Integer> items;
+    @MongoId
+    private String id;
+    
+    private HashMap<String, Integer> items;
     private String userId;
 
-    public Cart(Map<String, Integer> items, String userId) {
+    public Cart(HashMap<String, Integer> items, String userId) {
         this.items = items;
         this.userId = userId;
     }
@@ -48,7 +35,15 @@ public class Cart {
         return this;
     }
 
-    public ArrayList<CartItem> getItems() {
+    public String getId() {
+        return id;
+    }
+
+    public HashMap<String, Integer> getItems() {
         return items;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

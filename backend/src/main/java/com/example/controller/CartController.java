@@ -1,30 +1,101 @@
 package com.example.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.model.AuthToken;
 import com.example.model.Cart;
-import com.example.model.Product;
+import com.example.repository.AuthRepository;
+import com.example.repository.CartRepository;
+import com.example.util.JsonError;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@RequestMapping("/api/cart")
 public class CartController {
-    @GetMapping("/api/cart")
-    public List<Product> getCart(@RequestParam("authToken") String authToken) {
+    @Autowired
+    AuthRepository authRepository;
+    @Autowired
+    CartRepository cartRepository;
 
-        if (authToken == "123") {
-            // Cart cart = cartRepository.findByUserName("danila");
-        
-            return Arrays.asList(new Product("Говядина", 400, "Свежая говядина",
-                    "https://ketokotleta.ru/wp-content/uploads/7/d/9/7d9421d8fb9ca8b972feea4bdf854eb2.jpeg"));
+    @GetMapping("")
+    public Object getCart(@RequestParam("auth_token") String authToken) {
+        AuthToken token = authRepository.findByAuthToken(authToken);
+        if (token == null || AuthToken.isStale(token)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new JsonError("Invalid credentials."));
         }
 
-        return Arrays.asList();
+        Cart userCart = cartRepository.findByUserId(token.getUserId());
+
+        if (userCart == null) {
+            return cartRepository.save(new Cart(new HashMap<String, Integer>(), token.getUserId()));
+        }
+        return userCart;
     }
 
+    @DeleteMapping("")
+    public Object clearCart(@RequestParam("auth_token") String authToken) {
+        AuthToken token = authRepository.findByAuthToken(authToken);
+        if (token == null || AuthToken.isStale(token)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new JsonError("Invalid credentials."));
+        }
+
+        Cart userCart = cartRepository.findByUserId(token.getUserId());
+
+        if (userCart != null) {
+            cartRepository.delete(userCart);
+        }
+
+        return new Cart(new HashMap<String, Integer>(), token.getUserId());
+    }
+
+    @PostMapping("/{productId}")
+    public Object addProduct(@PathVariable("productId") String productId,
+            @RequestParam("auth_token") String authToken) {
+        AuthToken token = authRepository.findByAuthToken(authToken);
+        if (token == null || AuthToken.isStale(token)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new JsonError("Invalid credentials."));
+        }
+
+        Cart userCart = cartRepository.findByUserId(token.getUserId());
+
+        if (userCart == null) {
+            userCart = new Cart(new HashMap<String, Integer>(), token.getUserId());
+        } else {
+            cartRepository.delete(userCart);
+        }
+
+        userCart.addItem(productId, 1);
+        return cartRepository.save(userCart);
+    }
+
+    @DeleteMapping("/{productId}")
+    public Object removeProduct(@PathVariable("productId") String productId,
+            @RequestParam("auth_token") String authToken) {
+        AuthToken token = authRepository.findByAuthToken(authToken);
+        if (token == null || AuthToken.isStale(token)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new JsonError("Invalid credentials."));
+        }
+
+        Cart userCart = cartRepository.findByUserId(token.getUserId());
+
+        if (userCart == null) {
+            return new Cart(new HashMap<String, Integer>(), token.getUserId());
+        }
+
+        cartRepository.delete(userCart);
+        userCart.removeItem(productId);
+        return cartRepository.save(userCart);
+    }
 }
